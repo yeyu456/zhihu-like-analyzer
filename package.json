@@ -1,0 +1,23 @@
+{
+  "name": "zhihu-like-analyzer",
+  "version": "0.1.0",
+  "description": "对打开的知乎页面的每个答案点赞数据统计.",
+  "author": "yeyu456 <yeyu456@gmail.com>",
+  "main": "./webpack.config.js",
+  "scripts": {
+    "watch": "webpack --watch --config ./webpack.config.js"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.14.0",
+    "babel-polyfill": "^6.13.0",
+    "babel-preset-latest": "^6.14.0",
+    "crx": "^3.0.3",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-sourcemaps": "^2.0.0-alpha",
+    "gulp-util": "^3.0.7",
+    "webpack": "^2.1.0-beta.22",
+    "babel-loader": "^6.2.5"
+  }
+}
