@@ -1,7 +1,7 @@
 
 export default class Loading {
 
-    static getLoadingElement() {
+    static getLoadingIcon() {
         let url = 'http://www.w3.org/2000/svg';
 
         let svg = document.createElementNS(url, 'svg');
@@ -39,5 +39,34 @@ export default class Loading {
         svg.appendChild(circle);
 
         return svg;
+    }
+
+
+    static getLikeElement(likeNum) {
+        let btn = document.createElement('button');
+        btn.classList.add('core-like-btn');
+
+        let i = document.createElement('i');
+        btn.appendChild(i);
+
+        let span = document.createElement('span');
+        span.innerHTML = likeNum;
+        btn.appendChild(span);
+
+        let url = 'http://www.w3.org/2000/svg';
+        let svg = document.createElementNS(url, 'svg');
+        svg.setAttribute('width', '12');
+        svg.setAttribute('height', '12');
+        svg.setAttribute('viewBox', '0 0 120 120');
+        svg.setAttribute('preserveAspectRatio', 'xMidYMid');
+        i.appendChild(svg);
+
+        let path = document.createElementNS(url, 'path');
+        path.setAttribute('d', 'M 5 0 H 95 C 80 0, 105 -2, 97 5 L 60 40 L 60 105 C 60 110, 59 111, 56 108  L 45 97 C 43 95, 40 92, 40 90 L 40 40 L 3 5 C 1 3, 2 0, 5 0');
+        path.setAttribute('stroke', 'black');
+        path.setAttribute('fill', 'black');
+        svg.appendChild(path);
+
+        return btn;
     }
 }

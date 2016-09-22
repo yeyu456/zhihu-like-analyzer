@@ -6,7 +6,8 @@ const Config = {
     CSS_PATH: 'css/inject.css',
 
     
-
+    //点赞栏
+    VOTE_BAR_CLASS: 'zm-votebar',
 
     //普通答案参数
     ANSWER_VOTE_URL_PREFIX: 'https://www.zhihu.com/answer/',
