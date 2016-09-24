@@ -11,12 +11,15 @@
         "tabs",
         "cookies",
         "contextMenus",
-        "https://www.zhihu.com/*"
+        "background",
+        "webRequest",
+        "https://www.zhihu.com/",
+        "https://www.zhihu.com/node/TopStory2FeedList"
     ],
 
     "background": {
-        "scripts": ["scripts/background.js"],
-        "persistent": false
+        "scripts": ["background.js"],
+        "persistent": true
     },
 
     "content_scripts": [{
@@ -27,7 +30,7 @@
     }],
 
     "browser_action": {
-        "default_icon": "images/icon.png",
+        "default_icon": "img/icon.png",
         "default_popup": "popup.html"
     },
 

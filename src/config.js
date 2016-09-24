@@ -5,9 +5,10 @@ const Config = {
 
     CSS_PATH: 'css/inject.css',
 
+    ANSWER_REQUEST_URL: 'https://www.zhihu.com/node/TopStory2FeedList',
     
     //点赞栏
-    VOTE_BAR_CLASS: 'zm-votebar',
+    VOTE_BAR_SELECTOR: '.zm-votebar:not(.core-injected-bar)',
 
     //普通答案参数
     ANSWER_VOTE_URL_PREFIX: 'https://www.zhihu.com/answer/',

@@ -1,5 +1,5 @@
 
-export default class Loading {
+export default class Element {
 
     static getLoadingIcon() {
         let url = 'http://www.w3.org/2000/svg';
@@ -38,7 +38,10 @@ export default class Loading {
         circle.appendChild(animate);
         svg.appendChild(circle);
 
-        return svg;
+        let i = document.createElement('i');
+        i.appendChild(svg);
+        i.classList.add('core-like-loading');
+        return i;
     }
 
 
@@ -47,11 +50,34 @@ export default class Loading {
         btn.classList.add('core-like-btn');
 
         let i = document.createElement('i');
+        i.classList.add('core-like-filter');
         btn.appendChild(i);
 
         let span = document.createElement('span');
         span.innerHTML = likeNum;
+        span.classList.add('core-like-num');
+        span.style.display = 'none';
+        span.addEventListener('analyzed', (e) => {
+            e.target.style.display = 'inline';
+        }, {once: true});
         btn.appendChild(span);
+
+        let loadingIcon = Element.getLoadingIcon();
+        loadingIcon.style.display = 'none';
+        loadingIcon.addEventListener('analyzing', (e) => {
+            e.target.style.display = 'inline';
+        }, {once: true});
+        loadingIcon.addEventListener('analyzed', (e) => {
+            e.target.style.display = 'none';
+        }, {once: true});
+        btn.appendChild(loadingIcon);
+
+        let text = document.createElement('span');
+        text.innerText = '分析';
+        text.addEventListener('analyzing', (e) => {
+            e.target.style.display = 'none';
+        }, {once: true});
+        btn.appendChild(text);
 
         let url = 'http://www.w3.org/2000/svg';
         let svg = document.createElementNS(url, 'svg');
@@ -60,13 +86,15 @@ export default class Loading {
         svg.setAttribute('viewBox', '0 0 120 120');
         svg.setAttribute('preserveAspectRatio', 'xMidYMid');
         i.appendChild(svg);
-
         let path = document.createElementNS(url, 'path');
         path.setAttribute('d', 'M 5 0 H 95 C 80 0, 105 -2, 97 5 L 60 40 L 60 105 C 60 110, 59 111, 56 108  L 45 97 C 43 95, 40 92, 40 90 L 40 40 L 3 5 C 1 3, 2 0, 5 0');
-        path.setAttribute('stroke', 'black');
-        path.setAttribute('fill', 'black');
+        path.setAttribute('fill', 'rgb(105, 142, 191)');
         svg.appendChild(path);
 
+        btn.addEventListener('click', () => {
+            loadingIcon.dispatchEvent(new Event('analyzing'));
+            text.dispatchEvent(new Event('analyzing'));
+        }, {once: true});
         return btn;
     }
 }
