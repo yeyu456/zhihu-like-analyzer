@@ -1,7 +1,7 @@
 
 /*eslint no-console: ["error", { allow: ["log", "error"] }] */
 import Config from './config.js';
-import Element from './loading.js';
+import Dom from './dom.js';
 
 function injectCSS() {
     //inject css link
@@ -23,7 +23,7 @@ function listenMsg() {
 function injectElement() {
     let voteBars = document.querySelectorAll(Config.VOTE_BAR_SELECTOR);
     for (let i=0;i<voteBars.length;i++) {
-        let injectBtn = Element.getLikeElement(0);
+        let injectBtn = Dom.getAnalyzeButton();
         voteBars[i].appendChild(injectBtn);
         voteBars[i].classList.add('core-injected-bar');
     }
