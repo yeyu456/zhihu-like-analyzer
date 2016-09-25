@@ -3,14 +3,20 @@
         "ecmaVersion": 7,
         "sourceType": "module"
     },
+
     "env": {
         "browser": true,
         "node": true
     },
+
     "extends": "eslint:recommended",
+
     "globals": {
         "chrome": true
     },
+
+    "parser": "babel-eslint",
+
     "rules": {
 
         "no-mixed-spaces-and-tabs": 2,
