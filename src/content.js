@@ -1,7 +1,6 @@
-
 /*eslint no-console: ["error", { allow: ["log", "error"] }] */
 import Config from './config.js';
-import Dom from './dom.js';
+import Inject from './inject.js';
 
 function injectCSS() {
     //inject css link
@@ -9,7 +8,7 @@ function injectCSS() {
     style.rel = 'stylesheet';
     style.type = 'text/css';
     style.href = chrome.extension.getURL(Config.CSS_PATH);
-    (document.head||document.documentElement).appendChild(style);
+    (document.head || document.documentElement).appendChild(style);
 }
 
 function listenMsg() {
@@ -21,11 +20,25 @@ function listenMsg() {
 }
 
 function injectElement() {
-    let voteBars = document.querySelectorAll(Config.VOTE_BAR_SELECTOR);
-    for (let i=0;i<voteBars.length;i++) {
-        let injectBtn = Dom.getAnalyzeButton();
-        voteBars[i].appendChild(injectBtn);
-        voteBars[i].classList.add('core-injected-bar');
+    let curUrl = window.location.href;
+    let items;
+    switch (curUrl) {
+        case Config.INDEX_URL:
+            items = document.querySelectorAll(Config.INDEX_FEED_ITEM_SELECTOR);
+            break;
+
+        case Config.TOPIC_URL:
+        case Config.EXPLORE_URL:
+            items = document.querySelectorAll(Config.NORMAL_FEED_ITEM_SELECTOR);
+            break;
+
+        default:
+            return;
+    }
+    if (items && items.length !== 0) {
+        for (let i = 0; i < items.length; i++) {
+            Inject.setAnalyzer(items[i]);
+        }
     }
 }
 

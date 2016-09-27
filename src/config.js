@@ -6,7 +6,9 @@ const Config = {
     CSS_PATH: 'css/inject.css',
 
     ANSWER_REQUEST_URL: 'https://www.zhihu.com/node/TopStory2FeedList',
-    
+
+
+
     //点赞栏
     VOTE_BAR_SELECTOR: '.zm-votebar:not(.core-injected-bar)',
 
@@ -26,10 +28,21 @@ const Config = {
     ZHUAN_LAN_ID_SELECTOR: 'meta[itemprop="post-id"]',
 
 
-    //分析目标class
-    INDEX_FEED_ITEM_CLASS: 'feed-content zm-item-expanded',
+    //首页分析目标
+    INDEX_FEED_ITEM_SELECTOR: '.feed-content',
 
-    TOPIC_FEED_ITEM_CLASS: 'feed-item zm-item-expanded'
+    //首页URL
+    INDEX_URL: 'https://www.zhihu.com/',
+
+    //话题||发现分析目标
+    NORMAL_FEED_ITEM_SELECTOR: '.feed-item',
+
+    //话题URL
+    TOPIC_URL: 'https://www.zhihu.com/topic',
+
+    //发现URL
+    EXPLORE_URL: 'https://www.zhihu.com/explore'
+
 
 };
 export default Config;

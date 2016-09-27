@@ -102,7 +102,7 @@ export default class Dom {
 
     static ANALYZED_EVENT = 'analyzed';
 
-    static getAnalyzeButton() {
+    static getAnalyzeButton(analyzingCallback) {
         let btn = document.createElement('button');
         btn.classList.add('core-like-btn');
 
@@ -124,6 +124,7 @@ export default class Dom {
         btn.addEventListener('click', () => {
             loadingIcon.dispatchEvent(new Event(Dom.ANALYZING_EVENT));
             dispText.dispatchEvent(new Event(Dom.ANALYZING_EVENT));
+            analyzingCallback();
         }, {once: true});
 
         return btn;
