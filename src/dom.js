@@ -41,6 +41,7 @@ class LoadingIcon {
         animate.setAttribute('dur', '1s');
         animate.setAttribute('repeatCount', 'indefinite');
         animate.setAttribute('begin', '0s');
+        return animate;
     }
 
     static _setCircle(svg, animate) {
@@ -79,6 +80,7 @@ class FilterIcon {
         svg.setAttribute('height', '12');
         svg.setAttribute('viewBox', '0 0 120 120');
         svg.setAttribute('preserveAspectRatio', 'xMidYMid');
+        return svg;
     }
 
     static _setPath(svg) {
