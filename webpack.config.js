@@ -1,4 +1,3 @@
-require('babel-polyfill');
 const path = require('path');
 const webpack = require('webpack');
 
@@ -7,7 +6,7 @@ const buildPath = path.join(__dirname, 'build');
 
 module.exports = {
     entry : {
-        content : path.join(src, 'content'),
+        content : ['babel-polyfill', path.join(src, 'content')],
         background: path.join(src, 'background')
     },
     output : {
@@ -34,7 +33,10 @@ module.exports = {
                     presets : [
                         'es2015',
                         'es2016',
-                        'es2017'
+                        'es2017',
+                        'stage-2'
+                    ],
+                    plugins: [
                     ]
                 }
             }
