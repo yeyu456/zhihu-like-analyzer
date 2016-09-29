@@ -1,6 +1,7 @@
 import Config from './config.js';
 import Dom from './dom.js';
 import Network from './network.js';
+import Analyze from './analyze.js';
 
 export default class Inject {
 
@@ -32,19 +33,24 @@ export default class Inject {
     }
 
     static _getAnalyzeFunc(url) {
-        return async function () {
+        return async function (targetDom) {
             let nextUrl = url;
+            let data = [];
             while(nextUrl) {
                 let voteData = await Network.ajax(nextUrl);
                 if (voteData && voteData['success']) {
                     if (voteData['paging'] && voteData['paging']['next']) {
                         nextUrl = voteData['paging']['next'];
-                        console.log(nextUrl);
+                        let payload = voteData['payload'];
+                        if (payload && payload instanceof Array && payload.length !== 0) {
+                            data = data.concat(payload);
+                        }
                         continue;
                     }
                 }
                 nextUrl = null;
             }
+            Analyze.setAnalyzeData(data, targetDom);
         };
     }
 }

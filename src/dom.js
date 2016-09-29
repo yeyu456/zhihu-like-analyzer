@@ -126,7 +126,7 @@ export default class Dom {
         btn.addEventListener('click', () => {
             loadingIcon.dispatchEvent(new Event(Dom.ANALYZING_EVENT));
             dispText.dispatchEvent(new Event(Dom.ANALYZING_EVENT));
-            analyzingCallback();
+            analyzingCallback(btn);
         }, {once: true});
 
         return btn;
