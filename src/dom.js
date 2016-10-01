@@ -98,13 +98,20 @@ class FilterIcon {
     }
 }
 
+class Modal {
+
+    static getModal() {
+
+    }
+}
+
 export default class Dom {
 
     static ANALYZING_EVENT = 'analyzing';
 
     static ANALYZED_EVENT = 'analyzed';
 
-    static getAnalyzeButton(analyzingCallback) {
+    static getAnalyzeButton(analyzingUrl, analyzingCallback) {
         let btn = document.createElement('button');
         btn.classList.add('core-like-btn');
 
@@ -123,10 +130,11 @@ export default class Dom {
         btn.appendChild(dispText);
 
         //点击触发分析事件
+        let cb = analyzingCallback.bind(btn, analyzingUrl, btn);
         btn.addEventListener('click', () => {
             loadingIcon.dispatchEvent(new Event(Dom.ANALYZING_EVENT));
             dispText.dispatchEvent(new Event(Dom.ANALYZING_EVENT));
-            analyzingCallback(btn);
+            cb();
         }, {once: true});
 
         return btn;

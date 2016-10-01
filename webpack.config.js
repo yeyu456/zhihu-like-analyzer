@@ -1,3 +1,4 @@
+require('babel-polyfill');
 const path = require('path');
 const webpack = require('webpack');
 
@@ -34,7 +35,8 @@ module.exports = {
                         'es2015',
                         'es2016',
                         'es2017',
-                        'stage-2'
+                        'stage-2',
+                        'stage-3'
                     ],
                     plugins: [
                     ]

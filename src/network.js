@@ -15,10 +15,8 @@ export default class Network {
             xhr.ontimeout = () => {
                 throw new Error('Ajax timeout');
             };
-            xhr.timeout = 1000;
             xhr.open('GET', url, true);
             xhr.send(null);
         });
-
     }
 }

@@ -3,6 +3,29 @@ import Dom from './dom.js';
 import Network from './network.js';
 import Analyze from './analyze.js';
 
+async function analyzeFunc(url, targetDom) {
+    let nextUrl = url;
+    let data = [];
+    while(nextUrl) {
+        let voteData = await Network.ajax(nextUrl);
+        if (voteData && voteData['success']) {
+            if (voteData['paging']) {
+                nextUrl = voteData['paging']['next'];
+                
+            } else {
+                nextUrl = null;
+            }
+            let payload = voteData['payload'];
+            if (payload && payload instanceof Array && payload.length !== 0) {
+                data = data.concat(payload);
+            }
+        } else {
+            break;
+        }
+    }
+    Analyze.setAnalyzeData(data, targetDom);
+}
+
 export default class Inject {
 
     static setAnalyzer(targetDom) {
@@ -14,8 +37,7 @@ export default class Inject {
         if (!voteUrl) {
             return;
         }
-        let func = Inject._getAnalyzeFunc(voteUrl);
-        let injectBtn = Dom.getAnalyzeButton(func);
+        let injectBtn = Dom.getAnalyzeButton(voteUrl, analyzeFunc);
         voteBar.appendChild(injectBtn);
         voteBar.classList.add('core-injected-bar');
     }
@@ -30,27 +52,5 @@ export default class Inject {
             return null;
         }
         return Config.ANSWER_VOTE_URL_PREFIX + answerId + Config.ANSWER_VOTE_URL_SUFFIX;
-    }
-
-    static _getAnalyzeFunc(url) {
-        return async function (targetDom) {
-            let nextUrl = url;
-            let data = [];
-            while(nextUrl) {
-                let voteData = await Network.ajax(nextUrl);
-                if (voteData && voteData['success']) {
-                    if (voteData['paging'] && voteData['paging']['next']) {
-                        nextUrl = voteData['paging']['next'];
-                        let payload = voteData['payload'];
-                        if (payload && payload instanceof Array && payload.length !== 0) {
-                            data = data.concat(payload);
-                        }
-                        continue;
-                    }
-                }
-                nextUrl = null;
-            }
-            Analyze.setAnalyzeData(data, targetDom);
-        };
     }
 }
