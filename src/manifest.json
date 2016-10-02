@@ -19,14 +19,14 @@
 
     "background": {
         "scripts": ["background.js"],
-        "persistent": true
+        "persistent": false
     },
 
     "content_scripts": [{
         "matches": [
             "https://www.zhihu.com/*"
         ],
-        "js": ["content.js"]
+        "js": ["Chart.bundle.min.js", "content.js"]
     }],
 
     "browser_action": {

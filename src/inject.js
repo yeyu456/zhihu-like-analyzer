@@ -1,5 +1,5 @@
 import Config from './config.js';
-import Dom from './dom.js';
+import Dom from './component/button.js';
 import Network from './network.js';
 import Analyze from './analyze.js';
 

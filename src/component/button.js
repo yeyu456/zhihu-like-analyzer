@@ -3,6 +3,8 @@ const URL = 'http://www.w3.org/2000/svg';
 
 class LoadingIcon {
 
+    static LOADING_CLASS = 'core-like-loading';
+
     static getIcon() {
         let svg = LoadingIcon._getSvg();
         LoadingIcon._setRect(svg);
@@ -60,12 +62,14 @@ class LoadingIcon {
     static _getElement(svg) {
         let i = document.createElement('i');
         i.appendChild(svg);
-        i.classList.add('core-like-loading');
+        i.classList.add(LoadingIcon.LOADING_CLASS);
         return i;
     }
 }
 
 class FilterIcon {
+
+    static FILTER_CLASS = 'core-like-filter';
 
     static getIcon() {
         let svg = FilterIcon._getSvg();
@@ -92,48 +96,47 @@ class FilterIcon {
 
     static _getElement(svg) {
         let i = document.createElement('i');
-        i.classList.add('core-like-filter');
+        i.classList.add(FilterIcon.FILTER_CLASS);
         i.appendChild(svg);
         return i;
     }
 }
 
-class Modal {
-
-    static getModal() {
-
-    }
-}
-
-export default class Dom {
+export default class Button {
 
     static ANALYZING_EVENT = 'analyzing';
 
     static ANALYZED_EVENT = 'analyzed';
 
+    static BUTTON_CLASS = 'core-like-btn';
+
+    static NUM_CLASS = 'core-like-num';
+
+    static BUTTON_TEXT = '分析';
+
     static getAnalyzeButton(analyzingUrl, analyzingCallback) {
         let btn = document.createElement('button');
-        btn.classList.add('core-like-btn');
+        btn.classList.add(Button.BUTTON_CLASS);
 
         //过滤图标
         btn.appendChild(FilterIcon.getIcon());
 
         //点赞数文本
-        btn.appendChild(Dom._getLikeNum());
+        btn.appendChild(Button._getLikeNum());
 
         //加载图标
-        let loadingIcon = Dom._getLoadingIcon();
+        let loadingIcon = Button._getLoadingIcon();
         btn.appendChild(loadingIcon);
 
         //初始显示的文本
-        let dispText = Dom._getDispText();
+        let dispText = Button._getDispText();
         btn.appendChild(dispText);
 
         //点击触发分析事件
         let cb = analyzingCallback.bind(btn, analyzingUrl, btn);
         btn.addEventListener('click', () => {
-            loadingIcon.dispatchEvent(new Event(Dom.ANALYZING_EVENT));
-            dispText.dispatchEvent(new Event(Dom.ANALYZING_EVENT));
+            loadingIcon.dispatchEvent(new Event(Button.ANALYZING_EVENT));
+            dispText.dispatchEvent(new Event(Button.ANALYZING_EVENT));
             cb();
         }, {once: true});
 
@@ -144,10 +147,10 @@ export default class Dom {
         let span = document.createElement('span');
         //默认点赞数为0
         span.innerHTML = 0;
-        span.classList.add('core-like-num');
+        span.classList.add(Button.NUM_CLASS);
 
         span.style.display = 'none';
-        span.addEventListener(Dom.ANALYZED_EVENT, (e) => {
+        span.addEventListener(Button.ANALYZED_EVENT, (e) => {
             e.target.style.display = 'inline';
         }, {once: true});
 
@@ -158,10 +161,10 @@ export default class Dom {
         let loadingIcon = LoadingIcon.getIcon();
 
         loadingIcon.style.display = 'none';
-        loadingIcon.addEventListener(Dom.ANALYZING_EVENT, (e) => {
+        loadingIcon.addEventListener(Button.ANALYZING_EVENT, (e) => {
             e.target.style.display = 'inline';
         }, {once: true});
-        loadingIcon.addEventListener(Dom.ANALYZED_EVENT, (e) => {
+        loadingIcon.addEventListener(Button.ANALYZED_EVENT, (e) => {
             e.target.style.display = 'none';
         }, {once: true});
 
@@ -170,9 +173,9 @@ export default class Dom {
 
     static _getDispText() {
         let text = document.createElement('span');
-        text.innerText = '分析';
+        text.innerText = Button.BUTTON_TEXT;
 
-        text.addEventListener(Dom.ANALYZING_EVENT, (e) => {
+        text.addEventListener(Button.ANALYZING_EVENT, (e) => {
             e.target.style.display = 'none';
         }, {once: true});
         return text;

@@ -1,4 +1,5 @@
 import Config from './config.js';
+import Modal from './component/modal.js';
 
 class Statistics {
 
@@ -35,7 +36,7 @@ class Statistics {
         return this.expertData;
     }
 
-    add(author, like, thank, ask, answer) {
+    add(data, like, thank, ask, answer) {
         if (like <= Config.VOTE_DATA_FILTER_THRESHOLD &&
             thank <= Config.VOTE_DATA_FILTER_THRESHOLD &&
             ask <= Config.VOTE_DATA_FILTER_THRESHOLD &&
@@ -54,7 +55,7 @@ class Statistics {
         } else if (like < Config.VOTE_DATA_STATISTICS_EXPERT_LIKE_THRESHOLD) {
             this.expertNum++;
             this.expertData.push({
-                author: author,
+                data: data,
                 like: like,
                 thank: thank,
                 ask: ask,
@@ -66,41 +67,24 @@ class Statistics {
 
 export default class Analyze {
 
-    static setAnalyzeData(dataArray, targetDom) {
+    static setAnalyzeData(dataArray) {
         let stat = new Statistics();
         dataArray.forEach(data => {
             let dataDom = Analyze._getDataDom(data);
             let status = dataDom.querySelector(Config.VOTE_STATUS_SELECTOR);
-            let author = Analyze._getAuthor(status);
             let like = Analyze._getNumber(Config.VOTE_STATUS_LIKE_SELECTOR, ' 赞同', status);
             let thank = Analyze._getNumber(Config.VOTE_STATUS_THANK_SELECTOR, ' 感谢', status);
             let ask = Analyze._getNumber(Config.VOTE_STATUS_ASK_SELECTOR, ' 提问', status);
             let answer = Analyze._getNumber(Config.VOTE_STATUS_ANSWER_SELECTOR, ' 回答', status);
-            stat.add(author, like, thank, ask, answer);
+            stat.add(data, like, thank, ask, answer);
         });
-        console.log('expert:' + stat.expert);
-        console.log('senior:' + stat.senior);
-        console.log('middle:' + stat.middle);
-        console.log('junior:' + stat.junior);
-        console.log('zero:' + stat.zero);
-        console.log('list:');
-        console.log(stat.expertList);
+        Modal.setModal(stat);
     }
 
     static _getDataDom(data) {
         let dom = document.createElement('div');
         dom.innerHTML = data;
         return dom.firstChild;
-    }
-
-    static _getAuthor(status) {
-        let author = status.querySelector(Config.VOTE_STATUS_AUTHOR);
-        if (author) {
-            return author.innerHTML;
-        } else {
-            console.error('cannot find author elem ' + status.innerHTML);
-            return '';
-        }
     }
 
     static _getNumber(selector, replacement, status) {

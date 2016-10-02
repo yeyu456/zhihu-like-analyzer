@@ -11,6 +11,7 @@ const webpackConf = require('./webpack.config.js');
 const js = './src/*.js';
 const css = './src/css/*.css';
 const src = './src/**/*';
+const libJS = './src/lib/*.js';
 const excluedJS = '!./src/*.js';
 const build = './build';
 const pem = './build.pem';
@@ -22,6 +23,7 @@ gulp.task('clean', () => {
 
 gulp.task('copy', ['clean'], (cb) => {
     gulp.src([src, excluedJS]).pipe(gulp.dest(build));
+    gulp.src(libJS).pipe(gulp.dest(build));
     cb();
 });
 

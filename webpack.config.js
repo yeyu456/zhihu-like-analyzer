@@ -14,6 +14,9 @@ module.exports = {
         path : buildPath,
         filename: '[name].js'
     },
+    external : {
+        'chart.js' : 'Chart'
+    },
     plugins: [
         // new webpack.optimize.UglifyJsPlugin({
         //     compress: {
@@ -37,8 +40,6 @@ module.exports = {
                         'es2017',
                         'stage-2',
                         'stage-3'
-                    ],
-                    plugins: [
                     ]
                 }
             }

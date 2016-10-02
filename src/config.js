@@ -31,8 +31,6 @@ const Config = {
 
     VOTE_STATUS_ANSWER_SELECTOR: 'li:nth-child(4) a',
 
-    VOTE_STATUS_AUTHOR: '.author',
-
 
     //点赞数据统计阈值
     VOTE_DATA_FILTER_THRESHOLD: 0,
