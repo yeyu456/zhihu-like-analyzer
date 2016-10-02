@@ -7,11 +7,32 @@ class ModalChart {
         this.stat = stat;
     }
 
+    _getData() {
+        let data = {};
+        data['labels'] = ['大V', '小V', '高级', '普通', '四0'];
+        data['datasets'] = [];
+
+        let dataset = {};
+
+        dataset['data'] = [];
+        dataset['data'].push(this.stat.expert);
+        dataset['data'].push(this.stat.senior);
+        dataset['data'].push(this.stat.middle);
+        dataset['data'].push(this.stat.junior);
+        dataset['data'].push(this.stat.zero);
+
+        dataset['backgroundColor'] = [];
+
+
+        data['datasets'].push(dataset);
+    }
+
     get element() {
         let canvas = document.createElement('canvas');
         canvas.style.width = 490;
         canvas.style.height = 300;
         let ctx = canvas.getContext('2d');
+        let data = this._getData();
         let pieChart = new Chart(ctx, {
             type: 'doughnut',
             data: data
