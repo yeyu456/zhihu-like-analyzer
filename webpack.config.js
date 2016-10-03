@@ -14,7 +14,7 @@ module.exports = {
         path : buildPath,
         filename: '[name].js'
     },
-    external : {
+    externals : {
         'chart.js' : 'Chart'
     },
     plugins: [

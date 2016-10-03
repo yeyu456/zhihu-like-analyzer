@@ -20,29 +20,6 @@ const Config = {
 
     ANSWER_ID_SELECTOR: 'meta[itemprop="answer-id"]',
 
-    //点赞数据
-    VOTE_STATUS_SELECTOR: '.body',
-
-    VOTE_STATUS_LIKE_SELECTOR: 'li:nth-child(1) span',
-
-    VOTE_STATUS_THANK_SELECTOR: 'li:nth-child(2) span',
-
-    VOTE_STATUS_ASK_SELECTOR: 'li:nth-child(3) a',
-
-    VOTE_STATUS_ANSWER_SELECTOR: 'li:nth-child(4) a',
-
-
-    //点赞数据统计阈值
-    VOTE_DATA_FILTER_THRESHOLD: 0,
-
-    VOTE_DATA_STATISTICS_JUNIOR_LIKE_THRESHOLD: 100,
-
-    VOTE_DATA_STATISTICS_MIDDLE_LIKE_THRESHOLD: 1000,
-
-    VOTE_DATA_STATISTICS_SENIOR_LIKE_THRESHOLD: 10000,
-
-    VOTE_DATA_STATISTICS_EXPERT_LIKE_THRESHOLD: Number.MAX_SAFE_INTEGER,
-
 
     //专栏参数
     ZHUAN_LAN_VOTE_URL_PREFIX: 'https://www.zhihu.com/post/',
