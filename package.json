@@ -1,6 +1,6 @@
 {
     "name": "zhihu-like-analyzer",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "description": "对打开的知乎答案点赞数据统计.",
     "author": "yeyu456 <yeyu456@gmail.com>",
     "main": "./webpack.config.js",

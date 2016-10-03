@@ -4,7 +4,7 @@
 
     "name": "知乎点赞分析器",
     "description": "用于分析知乎答案点赞数据.",
-    "version": "1.0",
+    "version": "1.0.0",
 
     "permissions": [
         "activeTab",
